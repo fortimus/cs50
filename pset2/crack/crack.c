@@ -7,6 +7,18 @@ Otherwise, your program must proceed to crack the given password, ideally as qui
 Assume that each password has been hashed with C’s DES-based (not MD5-based) crypt function.
 Assume that each password is no longer than five (5) characters. Gasp!
 Assume that each password is composed entirely of alphabetical characters (uppercase and/or lowercase).
+
+// anushree:50xcIMJ0y.RXo => YES
+// brian:50mjprEcqC/ts => CA
+// bjbrown:50GApilQSG3E2 => 
+// lloyd:50n0AAUD.pL8g => 
+// malan:50CcfIk1QrPr6 => 
+// maria:509nVI8B9VfuA => 
+// natmelo:50JIIyhDORqMU => 
+// rob:50JGnXUgaafgc => 
+// stelios:51u8F0dkeDSbY => 
+// zamyla:50cI2vYkF0YU2 => 
+
 */
 
 #define _XOPEN_SOURCE
@@ -33,62 +45,31 @@ int main(int argc, char * argv[])
 
         //logic to cycle through all possible combinations of letters that could be used for password
 
-        char test[5];
+        char test[6];
         long long n = 1;
         int x = 0;
         int tested = 0;
-        for (int m = 0; m < 52; m++)
+        for (int m = 0; m < 57; m++)
         {
-            for (int l = 0; l < 52; l++)
+            for (int l = 0; l < 57; l++)
             {
-                for (int k = 0; k < 52; k++)
+                for (int k = 0; k < 57; k++)
                 {
-                    for (int j = 0; j < 53; j++)
+                    for (int j = 0; j < 57; j++)
                     {
-                        for (int i = 0; i < 53; i++)
+                        for (int i = 0; i < 57; i++)
                         {
-                            //cycles the first value in the test password
-                            test[0] = letters[i];
-
-                            //cycles the second value in the test password
-                            test[1] = letters[j];
-
-
-                             //cycles the third value in the test password
-                            test[2] = letters[k];
-
-
-                            //cycles the fourth value in the test password
-                            test[3] = letters[l];
-
-
-                            //cycles the fifth value in the test password
-                            test[4] = letters[m];
-
-
-                            //converts the current test password to the hashed value
-                            int testCounter = 0; //counts number of combinations tested
+                            test[0] = letters[i]; //cycles the first value in the test password
+                            test[1] = letters[j]; //cycles the second value in the test password
+                            test[2] = letters[k]; //cycles the third value in the test password
+                            test[3] = letters[l]; //cycles the fourth value in the test password
+                            test[4] = letters[m]; //cycles the fifth value in the test password
 
                             //compares the test password hash to the provided hash. Matches stop the program and print the test password
-                            for (int t = 0; t < hashLen; t++)
-                            {
-                                if (hash[t] == test[t])
-                                {
-                                    testCounter++;
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-
-                            tested++;
-                            printf("%s\n", test);
-                            if (testCounter == hashLen)
+                            if (strcmp(crypt(test, aSalt), hash) == 0)
                             {
                                 printf("%s\n", test);
-                                printf("Iterations tested: %i\n", tested);
-                                exit(0);
+                                return(0);
                             }
                         }
                     }
