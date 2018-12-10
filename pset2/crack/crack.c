@@ -10,7 +10,7 @@ Assume that each password is composed entirely of alphabetical characters (upper
 
 // anushree:50xcIMJ0y.RXo => YES
 // brian:50mjprEcqC/ts => CA
-// bjbrown:50GApilQSG3E2 => 
+// bjbrown:50GApilQSG3E2 => UPenn
 // lloyd:50n0AAUD.pL8g => 
 // malan:50CcfIk1QrPr6 => 
 // maria:509nVI8B9VfuA => 

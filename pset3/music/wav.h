@@ -3,7 +3,7 @@
 // Creative Commons Attribution license.
 // https://creativecommons.org/licenses/by/4.0/
 
-#include <cs50.h>
+#include "cs50.h"
 #include <stdio.h>
 #include <inttypes.h>
 

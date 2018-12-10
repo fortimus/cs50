@@ -1,6 +1,6 @@
 // Helper functions for music
 
-#include <cs50.h>
+#include "cs50.h"
 
 // Converts a fraction to eighths
 int duration(string fraction);
