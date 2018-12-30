@@ -3,16 +3,13 @@ CFLAGS ?= -fsanitize=integer -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Wer
 LDLIBS ?= -lcs50 -lm
 
 .PHONY: all
-all: notes synthesize helpers
+all: notes synthesize
 
-notes: helpers.c helpers.h notes.c wav.c wav.h cs50.h cs50.c
-	$(CC) $(CFLAGS) -o notes helpers.c notes.c wav.c cs50.c $(LDLIBS)
+notes: helpers.c helpers.h notes.c wav.c wav.h
+	$(CC) $(CFLAGS) -o notes helpers.c notes.c wav.c $(LDLIBS)
 
-synthesize: synthesize.c wav.c wav.h helpers.c helpers.h cs50.h cs50.c
-	$(CC) $(CFLAGS) -o synthesize helpers.c synthesize.c wav.c cs50.c $(LDLIBS)
-
-helpers: cs50.h cs50.c
-	$(CC) $(CFLAGS) -o cs50.c $(LDLIBS)
+synthesize: synthesize.c wav.c wav.h helpers.c helpers.h
+	$(CC) $(CFLAGS) -o synthesize helpers.c synthesize.c wav.c $(LDLIBS)
 
 .PHONY: clean
 clean:
