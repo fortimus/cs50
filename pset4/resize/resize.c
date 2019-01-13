@@ -48,12 +48,12 @@ int main(int argc, char *argv[])
     // check infile to ensure that it's a BMP file
     if (bf_infile.bfType != 0x4d42 || bf_infile.bfOffBits != 54 ||
         bi_infile.biSize != 40 || bi_infile.biCompression != 0 || bi_infile.biBitCount != 24)
-        {
-            fclose(inptr);
-            fclose(outptr);
-            fprintf(stderr, "Input file is not an uncompressed, 24-bit BMP.\n");
-            return 4;
-        }
+    {
+        fclose(inptr);
+        fclose(outptr);
+        fprintf(stderr, "Input file is not an uncompressed, 24-bit BMP.\n");
+        return 4;
+    }
 
     // define values for outfile BITMAPINFOHEADER
     BITMAPINFOHEADER bi_outfile;
@@ -62,15 +62,16 @@ int main(int argc, char *argv[])
     bi_outfile.biHeight = bi_infile.biHeight * resize_value;
 
     // determine padding for infile and outfile scanlines
-    int padding_infile = (4 - (bi_infile.biWidth * sizeof(RGBTRIPLE)) % 4) %4;
-    int padding_outfile = (4 - (bi_outfile.biWidth * sizeof(RGBTRIPLE)) %4) %4;
+    int padding_infile = (4 - (bi_infile.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+    int padding_outfile = (4 - (bi_outfile.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
 
     bi_outfile.biSizeImage = abs(bi_outfile.biHeight) * ((abs(bi_outfile.biWidth) * sizeof(RGBTRIPLE)) + padding_outfile);
 
     // define values for outfile BITMAPFILEHEADER
     BITMAPFILEHEADER bf_outfile;
     bf_outfile = bf_infile;
-    bf_outfile.bfSize = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi_outfile.biSizeImage; // *note, BITMAPFILEHEADER + BITMAPINFOHEADER + image
+    bf_outfile.bfSize = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) +
+                        bi_outfile.biSizeImage; // *note, BITMAPFILEHEADER + BITMAPINFOHEADER + image
 
 
     // write the new BITMAPFILEHEADER and BITMAPINFOHEADER to the outfile
